@@ -20,9 +20,32 @@ async def seed_transcripts_if_empty():
         count = result.scalar() or 0
 
         if count == 0:
-            logger.info("Transcript database is empty. Running auto-seed of landmark podcast episodes...")
-            # Ingest top 10 landmark episodes
-            await run_ingest(limit=10)
+            logger.info("Transcript database is empty. Seeding landmark podcast episodes...")
+            seed_json_path = Path(__file__).parent.parent / "app" / "rag" / "seed_chunks.json"
+            if seed_json_path.exists():
+                logger.info(f"Loading pre-indexed chunks from {seed_json_path}...")
+                import json
+                with open(seed_json_path, "r", encoding="utf-8") as f:
+                    chunks_data = json.load(f)
+                for item in chunks_data:
+                    chunk_obj = TranscriptChunk(
+                        id=item["id"],
+                        episode_slug=item["episode_slug"],
+                        episode_title=item["episode_title"],
+                        guest_name=item["guest_name"],
+                        publish_date=item.get("publish_date"),
+                        youtube_url=item.get("youtube_url"),
+                        timestamp_ref=item.get("timestamp_ref"),
+                        chunk_index=item["chunk_index"],
+                        chunk_text=item["chunk_text"],
+                        embedding_json=item["embedding_json"]
+                    )
+                    session.add(chunk_obj)
+                await session.commit()
+                logger.info(f"Successfully loaded {len(chunks_data)} chunks from pre-indexed seed.")
+            else:
+                # Ingest top 10 landmark episodes from raw files
+                await run_ingest(limit=10)
         else:
             logger.info(f"Database already populated with {count} transcript chunks.")
 

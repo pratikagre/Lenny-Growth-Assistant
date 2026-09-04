@@ -11,10 +11,10 @@ class Settings(BaseSettings):
     LOG_LEVEL: str = "INFO"
 
     # Database: Supports Postgres with pgvector or SQLite fallback
-    # If DATABASE_URL is not set, default to local SQLite for seamless zero-dependency operation
+    # If DATABASE_URL is not set, default to local SQLite (or /tmp/ on Vercel)
     DATABASE_URL: str = os.getenv(
         "DATABASE_URL",
-        "sqlite+aiosqlite:///./lenny_assistant.db"
+        "sqlite+aiosqlite:////tmp/lenny_assistant.db" if os.getenv("VERCEL") else "sqlite+aiosqlite:///./lenny_assistant.db"
     )
 
     # LLM Configuration

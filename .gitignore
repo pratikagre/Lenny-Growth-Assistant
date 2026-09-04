@@ -58,3 +58,5 @@ Thumbs.db
 
 # Scratch and raw clone
 scratch/
+
+.vercel
