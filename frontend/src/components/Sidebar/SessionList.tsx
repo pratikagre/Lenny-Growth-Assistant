@@ -51,7 +51,7 @@ export const SessionList: React.FC<SessionListProps> = ({
   ];
 
   return (
-    <aside className="w-72 border-r border-stone-200 bg-stone-50/70 backdrop-blur-md flex flex-col h-[calc(100vh-3.5rem)] shrink-0 select-none">
+    <aside className="w-72 border-r border-stone-200/70 bg-white/40 backdrop-blur-xl flex flex-col h-[calc(100vh-3.5rem)] shrink-0 select-none shadow-xs">
       {/* New Session Button */}
       <div className="p-3 border-b border-stone-200/60">
         <button

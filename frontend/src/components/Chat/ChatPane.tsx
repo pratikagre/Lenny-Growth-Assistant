@@ -73,7 +73,7 @@ export const ChatPane: React.FC<ChatPaneProps> = ({
   ];
 
   return (
-    <div className="flex-1 flex flex-col h-[calc(100vh-3.5rem)] bg-stone-50/50 overflow-hidden relative">
+    <div className="flex-1 flex flex-col h-[calc(100vh-3.5rem)] bg-transparent overflow-hidden relative">
       {/* Messages Scroll Area */}
       <div className="flex-1 overflow-y-auto">
         {messages.length === 0 ? (
@@ -94,7 +94,7 @@ export const ChatPane: React.FC<ChatPaneProps> = ({
                 <button
                   key={idx}
                   onClick={() => onSelectTemplate(s.prompt, s.mode)}
-                  className="p-3.5 rounded-xl bg-white border border-stone-200/80 hover:border-amber-400 hover:shadow-sm text-left transition-all group"
+                  className="p-3.5 rounded-xl bg-white/75 backdrop-blur-md border border-stone-200/70 hover:border-amber-400 hover:shadow-md hover:bg-white/90 text-left transition-all group"
                 >
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-xs font-bold text-stone-900 group-hover:text-amber-800">
@@ -139,21 +139,21 @@ export const ChatPane: React.FC<ChatPaneProps> = ({
       </div>
 
       {/* Input Composer */}
-      <div className="p-4 border-t border-stone-200 bg-white/90 backdrop-blur-md">
+      <div className="p-4 border-t border-stone-200/70 bg-white/60 backdrop-blur-xl">
         <div className="max-w-3xl mx-auto">
           {/* Mode Selector Pill Bar */}
           <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-1 bg-stone-100 p-0.5 rounded-lg text-xs font-medium border border-stone-200/70">
+            <div className="flex items-center gap-1 bg-white/70 backdrop-blur-md p-0.5 rounded-lg text-xs font-medium border border-stone-200/70 shadow-2xs">
               <button
                 type="button"
                 onClick={() => setMode('default')}
                 className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-all ${
                   mode === 'default'
-                    ? 'bg-white text-stone-900 shadow-xs font-semibold'
-                    : 'text-stone-500 hover:text-stone-900'
+                    ? 'bg-amber-600 text-white shadow-xs font-semibold'
+                    : 'text-stone-600 hover:text-stone-900'
                 }`}
               >
-                <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+                <Sparkles className="w-3.5 h-3.5" />
                 <span>Standard RAG Q&A</span>
               </button>
               <button
@@ -161,16 +161,16 @@ export const ChatPane: React.FC<ChatPaneProps> = ({
                 onClick={() => setMode('ship30')}
                 className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-all ${
                   mode === 'ship30'
-                    ? 'bg-white text-stone-900 shadow-xs font-semibold'
-                    : 'text-stone-500 hover:text-stone-900'
+                    ? 'bg-amber-600 text-white shadow-xs font-semibold'
+                    : 'text-stone-600 hover:text-stone-900'
                 }`}
               >
-                <Feather className="w-3.5 h-3.5 text-amber-600" />
+                <Feather className="w-3.5 h-3.5" />
                 <span>Ship 30 for 30 Essay</span>
               </button>
             </div>
 
-            <span className="text-[11px] text-stone-600 hidden sm:inline">
+            <span className="text-[11px] text-stone-500 font-medium hidden sm:inline">
               Enter to send, Shift+Enter for new line
             </span>
           </div>
@@ -188,7 +188,7 @@ export const ChatPane: React.FC<ChatPaneProps> = ({
                   : "Ask anything about product strategy, growth loops, roadmaps, or Lenny's guests..."
               }
               rows={2}
-              className="w-full resize-none p-3 pr-12 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 text-xs sm:text-sm text-stone-900 placeholder:text-stone-400 bg-stone-50/50 focus:bg-white transition-all outline-none"
+              className="w-full resize-none p-3 pr-12 rounded-xl border border-stone-300/80 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 text-xs sm:text-sm text-stone-900 placeholder:text-stone-400 bg-white/80 backdrop-blur-md focus:bg-white transition-all outline-none shadow-xs"
             />
             <button
               type="submit"

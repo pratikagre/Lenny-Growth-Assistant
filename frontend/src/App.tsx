@@ -230,7 +230,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="h-screen w-screen flex flex-col overflow-hidden bg-stone-50 font-sans text-stone-900">
+    <div className="h-screen w-screen flex flex-col overflow-hidden bg-gradient-radiant font-sans text-stone-900">
       {/* Top Header */}
       <Header
         onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
